@@ -73,6 +73,8 @@ from ultralytics.nn.modules import (
     YOLOESegment26,
     v10Detect,
 )
+from ultralytics.nn.modules.block import ContrastDrivenFeatureAggregation, SDFM
+from ultralytics.nn.modules.head import Detect_SEAM
 from ultralytics.utils import DEFAULT_CFG_DICT, LOGGER, WINDOWS, YAML, colorstr, emojis
 from ultralytics.utils.checks import check_requirements, check_suffix, check_yaml
 from ultralytics.utils.loss import (
@@ -97,6 +99,7 @@ from ultralytics.utils.torch_utils import (
     smart_inference_mode,
     time_sync,
 )
+
 
 
 class BaseModel(torch.nn.Module):
@@ -288,7 +291,7 @@ class BaseModel(torch.nn.Module):
         self = super()._apply(fn)
         m = self.model[-1]  # Detect()
         if isinstance(
-            m, Detect
+            m, Detect,Detect_SEAM
         ):  # includes all Detect subclasses like Segment, Pose, OBB, WorldDetect, YOLOEDetect, YOLOESegment
             m.stride = fn(m.stride)
             m.anchors = fn(m.anchors)
@@ -396,7 +399,7 @@ class DetectionModel(BaseModel):
 
         # Build strides
         m = self.model[-1]  # Detect()
-        if isinstance(m, Detect):  # includes all Detect subclasses like Segment, Pose, OBB, YOLOEDetect, YOLOESegment
+        if isinstance(m, Detect,Detect_SEAM):  # includes all Detect subclasses like Segment, Pose, OBB, YOLOEDetect, YOLOESegment
             s = 256  # 2x min stride
             m.inplace = self.inplace
 
@@ -1678,9 +1681,13 @@ def parse_model(d, ch, verbose=True):
             args = [ch[f]]
         elif m is Concat:
             c2 = sum(ch[x] for x in f)
+        elif m in SDFM:
+            c2 = ch[f[1]]
+            args = [c2, *args]
         elif m in frozenset(
             {
                 Detect,
+                Detect_SEAM,
                 WorldDetect,
                 YOLOEDetect,
                 Segment,
@@ -1696,7 +1703,7 @@ def parse_model(d, ch, verbose=True):
             args.extend([reg_max, end2end, [ch[x] for x in f]])
             if m is Segment or m is YOLOESegment or m is Segment26 or m is YOLOESegment26:
                 args[2] = make_divisible(min(args[2], max_channels) * width, 8)
-            if m in {Detect, YOLOEDetect, Segment, Segment26, YOLOESegment, YOLOESegment26, Pose, Pose26, OBB, OBB26}:
+            if m in {Detect, Detect_SEAM,YOLOEDetect, Segment, Segment26, YOLOESegment, YOLOESegment26, Pose, Pose26, OBB, OBB26}:
                 m.legacy = legacy
         elif m is v10Detect:
             args.append([ch[x] for x in f])
@@ -1714,6 +1721,11 @@ def parse_model(d, ch, verbose=True):
             c2 = args[0]
             c1 = ch[f]
             args = [*args[1:]]
+
+
+        elif m in ContrastDrivenFeatureAggregation:
+            c2 = ch[f]
+            args = [c2, *args]
         else:
             c2 = ch[f]
 
