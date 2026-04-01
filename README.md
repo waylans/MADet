@@ -1,7 +1,7 @@
 
 
 ## A Multi-Dimensional Adaptive Detector for Low-Altitude Fine-Grained Vehicles
-This repository(MADet) is the official PyTorch implementation of the paper "A Multi-Dimensional Adaptive Detector for Low-Altitude Fine-Grained Vehicles".  
+This repository(MADA) is the official PyTorch implementation of the paper "A Multi-Dimensional Adaptive Detector for Low-Altitude Fine-Grained Vehicles".  
 
 ---
 ### Overall architecture of the proposed Multi-Dimensional Adaptive Detector for Low-Altitude Fine-Grained Vehicles.
@@ -26,11 +26,11 @@ To comprehensively evaluate the performance of the proposed method in complex ae
 
 
 
-## MADet
+## MADA
 
 
 
-#### Task1: Segmentation  on ACDC dataset
+#### Task1: Performance Comparison of Different Feature Enhancement Strategies on Backbone.
 
 <table>
     <tr>
@@ -39,7 +39,7 @@ To comprehensively evaluate the performance of the proposed method in complex ae
 </table>
   
 
-#### Task2: Segmentation  on the MRI and CT subset of MM-WHS dataset
+#### Task2: Ablation Study on High-Level and Low-Level Feature Fusion Mechanisms.
 
 <table>
     <tr>
@@ -48,9 +48,7 @@ To comprehensively evaluate the performance of the proposed method in complex ae
 </table>
   
 
-
-
-#### Task3: Segmentation  on Synapse dataset
+#### Task3: Impact of Different Detection Head Architectures on Detection Performance.
 
 <table>
     <tr>
@@ -58,6 +56,33 @@ To comprehensively evaluate the performance of the proposed method in complex ae
     </tr>
 </table>
   
+
+#### Task4: Comparative Analysis of Different Bounding Box Regression Loss Functions.
+
+<table>
+    <tr>
+    <td><img src="PaperFigs\Fig9.png" width = "100%" alt="Single-Modality semantic segmentation"/></td>
+    </tr>
+</table>
+
+#### Task5: Robustness Evaluation Under Varying Model Scales and Input Resolution.
+<table>
+    <tr>
+    <td><img src="PaperFigs\Fig9.png" width = "100%" alt="Single-Modality semantic segmentation"/></td>
+    </tr>
+</table>
+
+
+#### Task6: Comparison with Aerial-Specific SOTA Methods on Aerial Vehicle Dataset.
+
+<table>
+    <tr>
+    <td><img src="PaperFigs\Fig9.png" width = "100%" alt="Single-Modality semantic segmentation"/></td>
+    </tr>
+</table>
+
+
+
 
 ### Training
 
