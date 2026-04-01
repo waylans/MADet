@@ -41,52 +41,6 @@ This repository(MDAD) is the official PyTorch implementation of the paper "A Mul
 
 ---
 
----
-
-<p align="center">
-  <img src="pictures/MDAD.png" width="500"/>
-  <br>
-  <em><b>Figure 1.</b> Overall architecture of the proposed Multi-Dimensional Adaptive Detector for Low-Altitude Fine-Grained Vehicles.</em>
-</p>
-
-<br>
-
-<table align="center">
-  <tr>
-    <td align="center">
-      <img src="pictures/CDFA.png" width="280"/><br>
-      <em><b>(a)</b> CDFA Module</em>
-    </td>
-    <td align="center">
-      <img src="pictures/SDFM.png" width="280"/><br>
-      <em><b>(b)</b> SDFM Module</em>
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <img src="pictures/SEA.png" width="280"/><br>
-      <em><b>(c)</b> SEA Module</em>
-    </td>
-    <td align="center">
-      <img src="pictures/Visualization.png" width="280"/><br>
-      <em><b>(d)</b> Gaussian Modeling & NWD</em>
-    </td>
-  </tr>
-</table>
-
-<p align="center">
-  <em><b>Figure 2.</b> Detailed structures of core modules in the proposed method.</em>
-</p>
-
-<br>
-
-<p align="center">
-  <img src="pictures/Dataset_Visualization.png" width="500"/>
-  <br>
-  <em><b>Figure 3.</b> Visualization of the six fine-grained vehicle categories in the specialized dataset.</em>
-</p>
-
----
 
 ## Dataset
 
@@ -94,17 +48,24 @@ To comprehensively evaluate the performance of the proposed method in complex ae
 
 
 
-## MDAD
 
 
 
 #### Task1: Performance Comparison of Different Feature Enhancement Strategies on Backbone.
 
-<table>
-    <tr>
-    <td><img src="PaperFigs\Fig7.png" width = "100%" alt="Single-Modality semantic segmentation"/></td>
-    </tr>
-</table>
+|--------------------------------------------|--------|-----------|
+||Metric|
+| Backbone (Improvement 1)                   | mAP@50 | mAP@50:95 |
+|--------------------------------------------|--------|-----------|
+| YOLOv11 (Baseline)                         | 0.828  | 0.602     |
+| + Adaptive Fine-Grained Channel Attention  | 0.830  | 0.611     |
+| + Channel Prior Convolutional Attention    | 0.838  | 0.608     |
+| + MultiPath Coordinate Attention           | 0.830  | 0.603     |
+| + SimAM                                    | 0.830  | 0.605     |
+| + TripletAttention                         | 0.832  | 0.604     |
+| + BiLevelRoutingAttention                  | 0.825  | 0.605     |
+| + Vision Transformer with Deformable Attention | 0.838  | 0.610 |
+| + Contrast Driven Feature Aggregation      | **0.840**  | **0.616**     |
   
 
 #### Task2: Ablation Study on High-Level and Low-Level Feature Fusion Mechanisms.
@@ -150,6 +111,11 @@ To comprehensively evaluate the performance of the proposed method in complex ae
 </table>
 
 
+<p align="center">
+  <img src="pictures/Dataset_Visualization.png" width="400"/>
+  <br>
+  <em>Visualization of the six fine-grained vehicle categories in the specialized dataset.</em>
+</p>
 
 
 ### Training
