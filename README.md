@@ -53,20 +53,21 @@ To comprehensively evaluate the performance of the proposed method in complex ae
 
 ##### Task1: Performance Comparison of Different Feature Enhancement Strategies on Backbone.
 
-<div style="font-size:14px">
-| Backbone (Improvement 1)                   | mAP@50 | mAP@50:95 |
-|--------------------------------------------|--------|-----------|
-| YOLOv11 (Baseline)                         | 0.828  | 0.602     |
-| + Adaptive Fine-Grained Channel Attention  | 0.830  | 0.611     |
-| + Channel Prior Convolutional Attention    | 0.838  | 0.608     |
-| + MultiPath Coordinate Attention           | 0.830  | 0.603     |
-| + SimAM                                    | 0.830  | 0.605     |
-| + TripletAttention                         | 0.832  | 0.604     |
-| + BiLevelRoutingAttention                  | 0.825  | 0.605     |
-| + Vision Transformer with Deformable Attention | 0.838  | 0.610 |
-| + Contrast Driven Feature Aggregation      | **0.840**  | **0.616**     |
-  
-</div>
+<sub>
+
+| Backbone (Improvement 1)                   | mAP@50 ↑ | mAP@50:95 ↑ |
+|-------------------------------------------|----------|-------------|
+| YOLOv11 (Baseline)                        | 0.828    | 0.602       |
+| + Adaptive Fine-Grained Channel Attention | 0.830    | 0.611       |
+| + Channel Prior Convolutional Attention   | 0.838    | 0.608       |
+| + MultiPath Coordinate Attention          | 0.830    | 0.603       |
+| + SimAM                                   | 0.830    | 0.605       |
+| + TripletAttention                        | 0.832    | 0.604       |
+| + BiLevelRoutingAttention                 | 0.825    | 0.605       |
+| + Vision Transformer w/ Deformable Attn   | 0.838    | 0.610       |
+| **+ CDFA (Ours)**                         | **0.840**| **0.616**   |
+
+</sub>
 #### Task2: Ablation Study on High-Level and Low-Level Feature Fusion Mechanisms.
 
 <table>
