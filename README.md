@@ -122,7 +122,7 @@ To comprehensively evaluate the performance of the proposed method in complex ae
 ---
 #### Visualization of the six fine-grained vehicle categories in the specialized dataset.
 <p align="center">
-  <img src="pictures/Dataset_Visualization.png" width="400"/>
+  <img src="pictures/Dataset_Visualization.png" width="300"/>
   <br>
 </p>
 
@@ -130,7 +130,7 @@ To comprehensively evaluate the performance of the proposed method in complex ae
 
 
 
-## Description of MDAD
+### Description of MDAD
 
 If you have any question, please discuss with me by sending email to wq@cap.edu.cn.
 
