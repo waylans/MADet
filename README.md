@@ -33,12 +33,6 @@ This repository(MDAD) is the official PyTorch implementation of the paper "A Mul
   </tr>
 </table>
 
-<p align="center">
-  <img src="pictures/Dataset_Visualization.png" width="400"/>
-  <br>
-  <em>Visualization of the six fine-grained vehicle categories in the specialized dataset.</em>
-</p>
-
 ---
 
 
@@ -132,11 +126,12 @@ To comprehensively evaluate the performance of the proposed method in complex ae
   <em>Visualization of the six fine-grained vehicle categories in the specialized dataset.</em>
 </p>
 
----
+
 ### Visualization of the six fine-grained vehicle categories in the specialized dataset.
-
-<img src="pictures/Dataset_Visualization.png"  width="300" />
-
+<p align="center">
+  <img src="pictures/Dataset_Visualization.png" width="400"/>
+  <br>
+</p>
 ---
 ### Training
 
