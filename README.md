@@ -22,7 +22,7 @@ This repository(MDAD) is the official PyTorch implementation of the paper "A Mul
   <tr>
     <td align="center">
       <img src="pictures/CDFA.png" width="300"/><br>
-      <em>CDFA Module</em>
+      <em>The schematic diagram of the Contrast-Driven Feature Aggregation (CDFA) module.</em>
     </td>
     <td align="center">
       <img src="pictures/SDFM.png" width="300"/><br>
