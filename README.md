@@ -4,26 +4,45 @@
 This repository(MDAD) is the official PyTorch implementation of the paper "A Multi-Dimensional Adaptive Detector for Low-Altitude Fine-Grained Vehicles".  
 
 ---
+---
+
 ### Overall architecture of the proposed Multi-Dimensional Adaptive Detector for Low-Altitude Fine-Grained Vehicles.
 
-<img src="pictures/MDAD.png" alt="MDAD" width="500" height="300"/>
+<p align="center">
+  <img src="pictures/MDAD.png" alt="MDAD" width="500"/>
+</p>
 
 ### The schematic diagram of the Contrast-Driven Feature Aggregation (CDFA) module.
 
-<img src="pictures/CDFA.png" alt="MDAD" width="600" height="400"/>
-
+<p align="center">
+  <img src="pictures/CDFA.png" alt="CDFA" width="600"/>
+</p>
 
 ### The detailed structure of the Scale-Aware Dynamic Fusion Module (SDFM).
-<img src="pictures/SDFM.png" alt="MDAD" width="600" height="400"/>
+
+<p align="center">
+  <img src="pictures/SDFM.png" alt="SDFM" width="600"/>
+</p>
 
 ### The detailed structure of the Semantic Enhancement and Aggregation Module.
-<img src="pictures/SEA.png" alt="MDAD" width="600" height="400"/>
+
+<p align="center">
+  <img src="pictures/SEA.png" alt="SEA" width="600"/>
+</p>
 
 ### Visualization of Gaussian modeling and Wasserstein distance calculation for bounding boxes.
-<img src="pictures/Visualization.png" alt="MDAD" width="600" height="400"/>
+
+<p align="center">
+  <img src="pictures/Visualization.png" alt="Visualization" width="600"/>
+</p>
 
 ### Visualization of the six fine-grained vehicle categories in the specialized dataset.
-<img src="pictures/Dataset_Visualization.png" alt="MDAD" width="600" height="400"/>
+
+<p align="center">
+  <img src="pictures/Dataset_Visualization.png" alt="Dataset" width="800"/>
+</p>
+
+---
 ---
 ## Dataset
 
