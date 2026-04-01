@@ -4,36 +4,26 @@
 This repository(MADet) is the official PyTorch implementation of the paper "A Multi-Dimensional Adaptive Detector for Low-Altitude Fine-Grained Vehicles".  
 
 ---
-### The Illustration of MTFENet
+### Overall architecture of the proposed Multi-Dimensional Adaptive Detector for Low-Altitude Fine-Grained Vehicles.
 
 <img src="pictures/MTFENet.png" alt="MTFENet" width="600" height="400"/>
 
 ---
 
 
+### The schematic diagram of the Contrast-Driven Feature Aggregation (CDFA) module.
 
-<table>
-  <tr>
-    <td rowspan="2">
-      <img src="PaperFigs/Fig1.png" width="400px" alt="MSCL-SwinUNet"/>
-    </td>
-    <td>
-      <img src="PaperFigs/Fig5.png" width="300px" alt="ACDC Dataset"/>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <img src="PaperFigs/Fig6.png" width="300px" alt="MM-WHS Dataset"/>
-    </td>
-  </tr>
-</table>
+<img src="pictures/MTFENet.png" alt="MTFENet" width="600" height="400"/>
 
 
+### The detailed structure of the Scale-Aware Dynamic Fusion Module (SDFM).
+<img src="pictures/MTFENet.png" alt="MTFENet" width="600" height="400"/>
 
 
 ## Dataset
 
-To evaluate the performance and generalization ability of the proposed MSCL-SwinUNet, we conducted experiments on three benchmark datasets across different imaging modalities.The **ACDC (Automatic Cardiac Diagnosis Challenge)** dataset is an MRI-based cardiac imaging dataset comprising **150 examinations** from different patients. It provides **pixel-level annotations** for **three anatomical structures**, namely the **left ventricle (LV)**, **right ventricle (RV)**, and **myocardium (MYO)**.The **MM-WHS (Multi-Modality Whole Heart Segmentation)** dataset includes **two imaging modalities**, consisting of **52 CT scans** and **46 MR scans**.To further assess cross-modality generalization, we employed the **Synapse multi-organ segmentation dataset**, which contains **3,779 CT images** spanning **30 anatomical categories**.
+To comprehensively evaluate the performance of the proposed method in complex aerial scenarios, we utilize a specialized aerial vehicle dataset comprising 2,698 high-resolution images captured by UAVs from top-down perspectives. The dataset covers diverse scenes, including urban roads, highways, and parking lots, under varying lighting conditions. It focuses on six key vehicle categories (articulated-bus, car, small-bus, bus, freight, and truck), with filtering applied to emphasize fine-grained classification challenges. Representative visual samples of these categories are illustrated in Figure 6. The dataset exhibits typical aerial characteristics such as extremely small object sizes, high density, and significant fine-grained visual confusion. Following a standard protocol, the dataset is randomly divided into training, validation, and testing sets with a ratio of 7:1:2.
+
 
 
 ## MADet
@@ -68,6 +58,23 @@ To evaluate the performance and generalization ability of the proposed MSCL-Swin
     </tr>
 </table>
   
+
+### Training
+
+```
+python ./ultralytics/train.py
+```
+### Evaluation
+
+```
+python ./ultralytics/val.py
+```
+### Prediction
+
+```
+python ./ultralytics/predict.py
+```
+
 
 ## Description of MSCL-SwinUNet
 
