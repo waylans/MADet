@@ -53,7 +53,7 @@ To comprehensively evaluate the performance of the proposed method in complex ae
 
 ##### Task1: Performance Comparison of Different Feature Enhancement Strategies on Backbone.
 
-
+<div style="font-size:14px">
 | Backbone (Improvement 1)                   | mAP@50 | mAP@50:95 |
 |--------------------------------------------|--------|-----------|
 | YOLOv11 (Baseline)                         | 0.828  | 0.602     |
@@ -66,7 +66,7 @@ To comprehensively evaluate the performance of the proposed method in complex ae
 | + Vision Transformer with Deformable Attention | 0.838  | 0.610 |
 | + Contrast Driven Feature Aggregation      | **0.840**  | **0.616**     |
   
-
+</div>
 #### Task2: Ablation Study on High-Level and Low-Level Feature Fusion Mechanisms.
 
 <table>
