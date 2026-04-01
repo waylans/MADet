@@ -6,20 +6,20 @@ This repository(MADA) is the official PyTorch implementation of the paper "A Mul
 ---
 ### Overall architecture of the proposed Multi-Dimensional Adaptive Detector for Low-Altitude Fine-Grained Vehicles.
 
-<img src="pictures/MADA.png" alt="MTFENet" width="600" height="400"/>
+<img src="pictures/MADA.png" alt="MADA" width="600" height="400"/>
 
----
+
 
 
 ### The schematic diagram of the Contrast-Driven Feature Aggregation (CDFA) module.
 
-<img src="pictures/CDFA.png" alt="MTFENet" width="600" height="400"/>
+<img src="pictures/CDFA.png" alt="MADA" width="600" height="400"/>
 
 
 ### The detailed structure of the Scale-Aware Dynamic Fusion Module (SDFM).
-<img src="pictures/SDFM.png" alt="MTFENet" width="600" height="400"/>
+<img src="pictures/SDFM.png" alt="MADA" width="600" height="400"/>
 
-
+---
 ## Dataset
 
 To comprehensively evaluate the performance of the proposed method in complex aerial scenarios, we utilize a specialized aerial vehicle dataset comprising 2,698 high-resolution images captured by UAVs from top-down perspectives. The dataset covers diverse scenes, including urban roads, highways, and parking lots, under varying lighting conditions. It focuses on six key vehicle categories (articulated-bus, car, small-bus, bus, freight, and truck), with filtering applied to emphasize fine-grained classification challenges. Representative visual samples of these categories are illustrated in Figure 6. The dataset exhibits typical aerial characteristics such as extremely small object sizes, high density, and significant fine-grained visual confusion. Following a standard protocol, the dataset is randomly divided into training, validation, and testing sets with a ratio of 7:1:2.
