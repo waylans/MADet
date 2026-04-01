@@ -132,7 +132,12 @@ To comprehensively evaluate the performance of the proposed method in complex ae
   <em>Visualization of the six fine-grained vehicle categories in the specialized dataset.</em>
 </p>
 
+---
+### Visualization of the six fine-grained vehicle categories in the specialized dataset.
 
+<img src="pictures/Dataset_Visualization.png"  width="300" />
+
+---
 ### Training
 
 ```
