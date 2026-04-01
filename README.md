@@ -6,18 +6,18 @@ This repository(MADA) is the official PyTorch implementation of the paper "A Mul
 ---
 ### Overall architecture of the proposed Multi-Dimensional Adaptive Detector for Low-Altitude Fine-Grained Vehicles.
 
-<img src="pictures/MTFENet.png" alt="MTFENet" width="600" height="400"/>
+<img src="pictures/MADA.png" alt="MTFENet" width="600" height="400"/>
 
 ---
 
 
 ### The schematic diagram of the Contrast-Driven Feature Aggregation (CDFA) module.
 
-<img src="pictures/MTFENet.png" alt="MTFENet" width="600" height="400"/>
+<img src="pictures/CDFA.png" alt="MTFENet" width="600" height="400"/>
 
 
 ### The detailed structure of the Scale-Aware Dynamic Fusion Module (SDFM).
-<img src="pictures/MTFENet.png" alt="MTFENet" width="600" height="400"/>
+<img src="pictures/SDFM.png" alt="MTFENet" width="600" height="400"/>
 
 
 ## Dataset
