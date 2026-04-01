@@ -5,9 +5,6 @@ This repository(MDAD) is the official PyTorch implementation of the paper "A Mul
 
 ---
 
-
-### Overall architecture of the proposed Multi-Dimensional Adaptive Detector for Low-Altitude Fine-Grained Vehicles.
-
 <p align="center">
   <img src="pictures/MDAD.png" width="400"/>
   <br>
@@ -16,27 +13,26 @@ This repository(MDAD) is the official PyTorch implementation of the paper "A Mul
 
 ---
 
-### Core Modules
 
 <table align="center">
   <tr>
     <td align="center">
-      <img src="pictures/CDFA.png" width="300"/><br>
+      <img src="pictures/CDFA.png" width="400"/><br>
       <em>The schematic diagram of the Contrast-Driven Feature Aggregation (CDFA) module.</em>
     </td>
     <td align="center">
-      <img src="pictures/SDFM.png" width="300"/><br>
-      <em>SDFM Module</em>
+      <img src="pictures/SDFM.png" width="400"/><br>
+      <em>The detailed structure of the Scale-Aware Dynamic Fusion Module.</em>
     </td>
   </tr>
   <tr>
     <td align="center">
-      <img src="pictures/SEA.png" width="300"/><br>
-      <em>SEA Module</em>
+      <img src="pictures/SEA.png" width="400"/><br>
+      <em>The detailed structure of the Semantic Enhancement and Aggregation Module.</em>
     </td>
     <td align="center">
-      <img src="pictures/Visualization.png" width="300"/><br>
-      <em>Gaussian Modeling & NWD</em>
+      <img src="pictures/Visualization.png" width="400"/><br>
+      <em>Visualization of Gaussian modeling and Wasserstein distance calculation for bounding boxes.</em>
     </td>
   </tr>
 </table>
