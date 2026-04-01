@@ -36,12 +36,9 @@ This repository(MADet) is the official PyTorch implementation of the paper "A Mu
 To evaluate the performance and generalization ability of the proposed MSCL-SwinUNet, we conducted experiments on three benchmark datasets across different imaging modalities.The **ACDC (Automatic Cardiac Diagnosis Challenge)** dataset is an MRI-based cardiac imaging dataset comprising **150 examinations** from different patients. It provides **pixel-level annotations** for **three anatomical structures**, namely the **left ventricle (LV)**, **right ventricle (RV)**, and **myocardium (MYO)**.The **MM-WHS (Multi-Modality Whole Heart Segmentation)** dataset includes **two imaging modalities**, consisting of **52 CT scans** and **46 MR scans**.To further assess cross-modality generalization, we employed the **Synapse multi-organ segmentation dataset**, which contains **3,779 CT images** spanning **30 anatomical categories**.
 
 
-## SwinUNet
+## MADet
 
 
-### Training
-
-**swin_base_patch4_window7_224_22k.pth** : Before training SwinUNet , loading ImageNet-pretrained swin_base_patch4_window7_224_22k.pth is very useful. We provide this pretrained backbone here. The pretrained backbone has already been transformed to fit for our repo.
 
 #### Task1: Segmentation  on ACDC dataset
 
@@ -79,6 +76,9 @@ If you have any question, please discuss with me by sending email to wq@cap.edu.
 
 # References
 Many thanks to their excellent works
-* [MMSegmentation](https://github.com/open-mmlab/mmsegmentation)
-* [MMGeneration](https://github.com/open-mmlab/mmgeneration)
+
+
+* **YOLOv11** – [Code](https://github.com/ultralytics/ultralytics)
+
+
 
