@@ -6,43 +6,43 @@ This repository(MDAD) is the official PyTorch implementation of the paper "A Mul
 ---
 ---
 
-### Overall architecture of the proposed Multi-Dimensional Adaptive Detector for Low-Altitude Fine-Grained Vehicles.
+#### Overall architecture of the proposed Multi-Dimensional Adaptive Detector for Low-Altitude Fine-Grained Vehicles.
 
 <p align="center">
-  <img src="pictures/MDAD.png" alt="MDAD" width="500"/>
+  <img src="pictures/MDAD.png" alt="MDAD" width="200"/>
 </p>
 
-### The schematic diagram of the Contrast-Driven Feature Aggregation (CDFA) module.
+#### The schematic diagram of the Contrast-Driven Feature Aggregation (CDFA) module.
 
 <p align="center">
-  <img src="pictures/CDFA.png" alt="CDFA" width="600"/>
+  <img src="pictures/CDFA.png" alt="CDFA" width="200"/>
 </p>
 
-### The detailed structure of the Scale-Aware Dynamic Fusion Module (SDFM).
+#### The detailed structure of the Scale-Aware Dynamic Fusion Module (SDFM).
 
 <p align="center">
-  <img src="pictures/SDFM.png" alt="SDFM" width="600"/>
+  <img src="pictures/SDFM.png" alt="SDFM" width="200"/>
 </p>
 
-### The detailed structure of the Semantic Enhancement and Aggregation Module.
+#### The detailed structure of the Semantic Enhancement and Aggregation Module.
 
 <p align="center">
-  <img src="pictures/SEA.png" alt="SEA" width="600"/>
+  <img src="pictures/SEA.png" alt="SEA" width="200"/>
 </p>
 
-### Visualization of Gaussian modeling and Wasserstein distance calculation for bounding boxes.
+#### Visualization of Gaussian modeling and Wasserstein distance calculation for bounding boxes.
 
 <p align="center">
-  <img src="pictures/Visualization.png" alt="Visualization" width="600"/>
+  <img src="pictures/Visualization.png" alt="Visualization" width="200"/>
 </p>
 
-### Visualization of the six fine-grained vehicle categories in the specialized dataset.
+#### Visualization of the six fine-grained vehicle categories in the specialized dataset.
 
 <p align="center">
-  <img src="pictures/Dataset_Visualization.png" alt="Dataset" width="800"/>
+  <img src="pictures/Dataset_Visualization.png" alt="Dataset" width="300"/>
 </p>
 
----
+
 ---
 ## Dataset
 
