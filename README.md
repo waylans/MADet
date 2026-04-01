@@ -63,7 +63,7 @@ To comprehensively evaluate the performance of the proposed method in complex ae
 | + TripletAttention                        | 0.832    | 0.604       |
 | + BiLevelRoutingAttention                 | 0.825    | 0.605       |
 | + Vision Transformer w/ Deformable Attn   | 0.838    | 0.610       |
-| **+ CDFA (Ours)**                         | **0.840**| **0.616**   |
+| + Contrast Driven Feature Aggregation     | **0.840**| **0.616**   |
 
 
 #### Task2: Ablation Study on High-Level and Low-Level Feature Fusion Mechanisms.
