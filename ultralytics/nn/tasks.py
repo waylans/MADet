@@ -1687,7 +1687,6 @@ def parse_model(d, ch, verbose=True):
         elif m in frozenset(
             {
                 Detect,
-                Detect_SEAM,
                 WorldDetect,
                 YOLOEDetect,
                 Segment,
@@ -1726,6 +1725,9 @@ def parse_model(d, ch, verbose=True):
         elif m is ContrastDrivenFeatureAggregation:
             c2 = ch[f]
             args = [c2, *args]
+        elif m is Detect_SEAM:
+            args = args
+            c2 = ch[f[0]] if isinstance(f, list) else ch[f]
         else:
             c2 = ch[f]
 
