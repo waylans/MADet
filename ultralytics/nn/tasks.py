@@ -1681,7 +1681,7 @@ def parse_model(d, ch, verbose=True):
             args = [ch[f]]
         elif m is Concat:
             c2 = sum(ch[x] for x in f)
-        elif m in SDFM:
+        elif m is SDFM:
             c2 = ch[f[1]]
             args = [c2, *args]
         elif m in frozenset(
