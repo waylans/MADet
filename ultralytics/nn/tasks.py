@@ -1728,8 +1728,13 @@ def parse_model(d, ch, verbose=True):
         elif m is Detect_SEAM:
             args = args
         
-            if isinstance(f, (list, tuple)):
-                c2 = ch[f[0] if len(f) else -1]
+            try:
+                if isinstance(f, (list, tuple)) and len(f):
+                    c2 = ch[f[0]]
+                else:
+                    c2 = ch[f] if isinstance(f, int) else ch[-1]
+            except Exception:
+                c2 = ch[-1]
 
         else:
             c2 = ch[f]
