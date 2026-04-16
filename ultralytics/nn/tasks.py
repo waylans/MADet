@@ -1723,7 +1723,7 @@ def parse_model(d, ch, verbose=True):
             args = [*args[1:]]
 
 
-        elif m in ContrastDrivenFeatureAggregation:
+        elif m is ContrastDrivenFeatureAggregation:
             c2 = ch[f]
             args = [c2, *args]
         else:
