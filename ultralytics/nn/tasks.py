@@ -1815,44 +1815,48 @@ def parse_model(d, ch, verbose=True):
         #     c2 = ch[f] if isinstance(f, int) else ch[-1]
 
         elif m in frozenset(
-        {
-            Detect,
-            Detect_SEAM,
-            WorldDetect,
-            YOLOEDetect,
-            Segment,
-            Segment26,
-            YOLOESegment,
-            YOLOESegment26,
-            Pose,
-            Pose26,
-            OBB,
-            OBB26,
-        }
-    ):
-        args.extend([reg_max, end2end, [ch[x] for x in f]])
-    
-        if m in {Segment, Segment26, YOLOESegment, YOLOESegment26}:
-            args[2] = make_divisible(min(args[2], max_channels) * width, 8)
-    
-        if m in {
-            Detect, Detect_SEAM,
-            YOLOEDetect,
-            Segment, Segment26,
-            YOLOESegment, YOLOESegment26,
-            Pose, Pose26,
-            OBB, OBB26
-        }:
-            m.legacy = legacy
-    
-        # 关键：保证 c2 正确
-        if isinstance(f, (list, tuple)) and len(f):
-            c2 = ch[f[0]]
-        else:
-            c2 = ch[f] if isinstance(f, int) else ch[-1]
+            {
+                Detect,
+                Detect_SEAM,
+                WorldDetect,
+                YOLOEDetect,
+                Segment,
+                Segment26,
+                YOLOESegment,
+                YOLOESegment26,
+                Pose,
+                Pose26,
+                OBB,
+                OBB26,
+            }
+        ):
+            args.extend([reg_max, end2end, [ch[x] for x in f]])
 
-        # else:
-        #     c2 = ch[f]
+            if m in {Segment, Segment26, YOLOESegment, YOLOESegment26}:
+                args[2] = make_divisible(min(args[2], max_channels) * width, 8)
+
+            if m in {
+                Detect,
+                Detect_SEAM,
+                YOLOEDetect,
+                Segment,
+                Segment26,
+                YOLOESegment,
+                YOLOESegment26,
+                Pose,
+                Pose26,
+                OBB,
+                OBB26,
+            }:
+                m.legacy = legacy
+
+            if isinstance(f, (list, tuple)) and len(f):
+                c2 = ch[f[0]]
+            else:
+                c2 = ch[f] if isinstance(f, int) else ch[-1]
+
+        else:
+            c2 = ch[f]
 
         m_ = torch.nn.Sequential(*(m(*args) for _ in range(n))) if n > 1 else m(*args)  # module
         t = str(m)[8:-2].replace("__main__.", "")  # module type
