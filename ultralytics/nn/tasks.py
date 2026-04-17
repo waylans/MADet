@@ -251,7 +251,7 @@ class BaseModel(torch.nn.Module):
                 if isinstance(m, RepVGGDW):
                     m.fuse()
                     m.forward = m.forward_fuse
-                if isinstance(m, Detect) and getattr(m, "end2end", False):
+                if isinstance(m,(Detect,Detect_SEAM)) and getattr(m, "end2end", False):
                     m.fuse()  # remove one2many head
             self.info(verbose=verbose)
 
@@ -1684,26 +1684,46 @@ def parse_model(d, ch, verbose=True):
         elif m is SDFM:
             c2 = ch[f[1]]
             args = [c2, *args]
+        # elif m in frozenset(
+        #     {
+        #         Detect,
+        #         WorldDetect,
+        #         YOLOEDetect,
+        #         Segment,
+        #         Segment26,
+        #         YOLOESegment,
+        #         YOLOESegment26,
+        #         Pose,
+        #         Pose26,
+        #         OBB,
+        #         OBB26,
+        #     }
+        # ):
+        #     args.extend([reg_max, end2end, [ch[x] for x in f]])
+        #     if m is Segment or m is YOLOESegment or m is Segment26 or m is YOLOESegment26:
+        #         args[2] = make_divisible(min(args[2], max_channels) * width, 8)
+        #     if m in {Detect, Detect_SEAM,YOLOEDetect, Segment, Segment26, YOLOESegment, YOLOESegment26, Pose, Pose26, OBB, OBB26}:
+        #         m.legacy = legacy
         elif m in frozenset(
-            {
-                Detect,
-                WorldDetect,
-                YOLOEDetect,
-                Segment,
-                Segment26,
-                YOLOESegment,
-                YOLOESegment26,
-                Pose,
-                Pose26,
-                OBB,
-                OBB26,
-            }
-        ):
-            args.extend([reg_max, end2end, [ch[x] for x in f]])
-            if m is Segment or m is YOLOESegment or m is Segment26 or m is YOLOESegment26:
-                args[2] = make_divisible(min(args[2], max_channels) * width, 8)
-            if m in {Detect, Detect_SEAM,YOLOEDetect, Segment, Segment26, YOLOESegment, YOLOESegment26, Pose, Pose26, OBB, OBB26}:
-                m.legacy = legacy
+        {
+            Detect,
+            WorldDetect,
+            YOLOEDetect,
+            Segment,
+            Segment26,
+            YOLOESegment,
+            YOLOESegment26,
+            Pose,
+            Pose26,
+            OBB,
+            OBB26,
+        }
+    ):
+        args.extend([reg_max, end2end, [ch[x] for x in f]])
+    if m is Segment or m is YOLOESegment or m is Segment26 or m is YOLOESegment26:
+        args[2] = make_divisible(min(args[2], max_channels) * width, 8)
+    if m in {Detect, Detect_SEAM, YOLOEDetect, Segment, Segment26, YOLOESegment, YOLOESegment26, Pose, Pose26, OBB, OBB26}:
+        m.legacy = legacy
         elif m is v10Detect:
             args.append([ch[x] for x in f])
         elif m is ImagePoolingAttn:
@@ -1725,19 +1745,51 @@ def parse_model(d, ch, verbose=True):
         elif m is ContrastDrivenFeatureAggregation:
             c2 = ch[f]
             args = [c2, *args]
-        elif m is Detect_SEAM:
-            args = args
+        # elif m is Detect_SEAM:
+        #     args = args
         
-            try:
-                if isinstance(f, (list, tuple)) and len(f):
-                    c2 = ch[f[0]]
-                else:
-                    c2 = ch[f] if isinstance(f, int) else ch[-1]
-            except Exception:
-                c2 = ch[-1]
-
+        #     try:
+        #         if isinstance(f, (list, tuple)) and len(f):
+        #             c2 = ch[f[0]]
+        #         else:
+        #             c2 = ch[f] if isinstance(f, int) else ch[-1]
+        #     except Exception:
+        #         c2 = ch[-1]
+        elif m in frozenset(
+            {
+                Detect,
+                Detect_SEAM,
+                WorldDetect,
+                YOLOEDetect,
+                Segment,
+                Segment26,
+                YOLOESegment,
+                YOLOESegment26,
+                Pose,
+                Pose26,
+                OBB,
+                OBB26,
+            }
+        ):
+            # Detect-like heads: append runtime args expected by the head constructor
+            args.extend([reg_max, end2end, [ch[x] for x in f]])
+        
+            # Seg heads need mask channel scaling on args[2]
+            if m in {Segment, Segment26, YOLOESegment, YOLOESegment26}:
+                args[2] = make_divisible(min(args[2], max_channels) * width, 8)
+        
+            # Keep legacy behavior flag aligned with official detect-family heads
+            if m in {Detect, Detect_SEAM, YOLOEDetect, Segment, Segment26, YOLOESegment, YOLOESegment26, Pose, Pose26, OBB, OBB26}:
+                m.legacy = legacy
+        
+            # Output channel bookkeeping for parser
+            if isinstance(f, (list, tuple)) and len(f):
+                c2 = ch[f[0]]
         else:
-            c2 = ch[f]
+            c2 = ch[f] if isinstance(f, int) else ch[-1]
+
+        # else:
+        #     c2 = ch[f]
 
         m_ = torch.nn.Sequential(*(m(*args) for _ in range(n))) if n > 1 else m(*args)  # module
         t = str(m)[8:-2].replace("__main__.", "")  # module type
@@ -1745,7 +1797,7 @@ def parse_model(d, ch, verbose=True):
         m_.i, m_.f, m_.type = i, f, t  # attach index, 'from' index, type
         if verbose:
             LOGGER.info(f"{i:>3}{f!s:>20}{n_:>3}{m_.np:10.0f}  {t:<45}{args!s:<30}")  # print
-        save.extend(x % i for x in ([f] if isinstance(f, int) else f) if x != -1)  # append to savelist
+        save.extend(x % i for x in ([f] (f, int) else f) if x != -1)  # append to savelist
         layers.append(m_)
         if i == 0:
             ch = []
@@ -1816,11 +1868,11 @@ def guess_model_task(model):
             return "obb"
 
     # Guess from model cfg
-    if isinstance(model, dict):
+    (model, dict):
         with contextlib.suppress(Exception):
             return cfg2task(model)
     # Guess from PyTorch model
-    if isinstance(model, torch.nn.Module):  # PyTorch model
+    (model, torch.nn.Module):  # PyTorch model
         for x in "model.args", "model.model.args", "model.model.model.args":
             with contextlib.suppress(Exception):
                 return eval(x)["task"]  # nosec B307: safe eval of known attribute paths
@@ -1836,7 +1888,7 @@ def guess_model_task(model):
                 return "pose"
             elif isinstance(m, OBB):
                 return "obb"
-            elif isinstance(m, (Detect, WorldDetect, YOLOEDetect, v10Detect)):
+            elif isinstance(m, (Detect,Detect_SEAM, WorldDetect, YOLOEDetect, v10Detect)):
                 return "detect"
 
     # Guess from model filename
