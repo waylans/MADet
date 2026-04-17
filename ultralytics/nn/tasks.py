@@ -1914,8 +1914,8 @@ def guess_model_task(model):
     #         elif isinstance(m, (Detect,Detect_SEAM, WorldDetect, YOLOEDetect, v10Detect)):
     #             return "detect"
     if isinstance(model, dict):
-    with contextlib.suppress(Exception):
-        return cfg2task(model)
+        with contextlib.suppress(Exception):
+            return cfg2task(model)
 
     if isinstance(model, torch.nn.Module):
         for x in "model.args", "model.model.args", "model.model.model.args":
