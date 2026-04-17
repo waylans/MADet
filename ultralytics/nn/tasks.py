@@ -1794,7 +1794,8 @@ def parse_model(d, ch, verbose=True):
         m_.i, m_.f, m_.type = i, f, t  # attach index, 'from' index, type
         if verbose:
             LOGGER.info(f"{i:>3}{f!s:>20}{n_:>3}{m_.np:10.0f}  {t:<45}{args!s:<30}")  # print
-        save.extend(x % i for x in ([f] (f, int) else f) if x != -1)  # append to savelist
+        # save.extend(x % i for x in ([f] (f, int) else f) if x != -1)  # append to savelist
+        save.extend(x % i for x in ([f] if isinstance(f, int) else f) if x != -1)
         layers.append(m_)
         if i == 0:
             ch = []
