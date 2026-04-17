@@ -323,17 +323,23 @@ class BaseModel(torch.nn.Module):
     #     if verbose:
     #         LOGGER.info(f"Transferred {len_updated_csd}/{len(self.model.state_dict())} items from pretrained weights")
 
-    def load(self, weights, verbose=True):
-        """Load weights into the model.
+    # def load(self, weights, verbose=True):
+    #     """Load weights into the model.
     
-        Args:
-            weights (dict | torch.nn.Module): The pre-trained weights to be loaded.
-            verbose (bool, optional): Whether to log the transfer progress.
-        """
+    #     Args:
+    #         weights (dict | torch.nn.Module): The pre-trained weights to be loaded.
+    #         verbose (bool, optional): Whether to log the transfer progress.
+    #     """
+    #     model = weights["model"] if isinstance(weights, dict) else weights
+    #     csd = model.float().state_dict()  # checkpoint state_dict as FP32
+    #     updated_csd = intersect_dicts(csd, self.state_dict())  # intersect
+    #     self.load_state_dict(updated_csd, strict=False)  # load
+        
+    def load(self, weights, verbose=True):
         model = weights["model"] if isinstance(weights, dict) else weights
-        csd = model.float().state_dict()  # checkpoint state_dict as FP32
-        updated_csd = intersect_dicts(csd, self.state_dict())  # intersect
-        self.load_state_dict(updated_csd, strict=False)  # load
+        csd = model.float().state_dict()
+        updated_csd = intersect_dicts(csd, self.state_dict())
+        self.load_state_dict(updated_csd, strict=False)
         len_updated_csd = len(updated_csd)
         first_conv = "model.0.conv.weight"  # hard-coded to yolo models for now
     
