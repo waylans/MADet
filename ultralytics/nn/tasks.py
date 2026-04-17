@@ -1891,17 +1891,39 @@ def guess_model_task(model):
             return "obb"
 
     # Guess from model cfg
-    (model, dict):
-        with contextlib.suppress(Exception):
-            return cfg2task(model)
-    # Guess from PyTorch model
-    (model, torch.nn.Module):  # PyTorch model
+    # (model, dict):
+    #     with contextlib.suppress(Exception):
+    #         return cfg2task(model)
+    # # Guess from PyTorch model
+    # (model, torch.nn.Module):  # PyTorch model
+    #     for x in "model.args", "model.model.args", "model.model.model.args":
+    #         with contextlib.suppress(Exception):
+    #             return eval(x)["task"]  # nosec B307: safe eval of known attribute paths
+    #     for x in "model.yaml", "model.model.yaml", "model.model.model.yaml":
+    #         with contextlib.suppress(Exception):
+    #             return cfg2task(eval(x))  # nosec B307: safe eval of known attribute paths
+    #     for m in model.modules():
+    #         if isinstance(m, (Segment, YOLOESegment)):
+    #             return "segment"
+    #         elif isinstance(m, Classify):
+    #             return "classify"
+    #         elif isinstance(m, Pose):
+    #             return "pose"
+    #         elif isinstance(m, OBB):
+    #             return "obb"
+    #         elif isinstance(m, (Detect,Detect_SEAM, WorldDetect, YOLOEDetect, v10Detect)):
+    #             return "detect"
+    if isinstance(model, dict):
+    with contextlib.suppress(Exception):
+        return cfg2task(model)
+
+    if isinstance(model, torch.nn.Module):
         for x in "model.args", "model.model.args", "model.model.model.args":
             with contextlib.suppress(Exception):
-                return eval(x)["task"]  # nosec B307: safe eval of known attribute paths
+                return eval(x)["task"]
         for x in "model.yaml", "model.model.yaml", "model.model.model.yaml":
             with contextlib.suppress(Exception):
-                return cfg2task(eval(x))  # nosec B307: safe eval of known attribute paths
+                return cfg2task(eval(x))
         for m in model.modules():
             if isinstance(m, (Segment, YOLOESegment)):
                 return "segment"
@@ -1911,7 +1933,7 @@ def guess_model_task(model):
                 return "pose"
             elif isinstance(m, OBB):
                 return "obb"
-            elif isinstance(m, (Detect,Detect_SEAM, WorldDetect, YOLOEDetect, v10Detect)):
+            elif isinstance(m, (Detect, Detect_SEAM, WorldDetect, YOLOEDetect, v10Detect)):
                 return "detect"
 
     # Guess from model filename
