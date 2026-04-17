@@ -1748,6 +1748,8 @@ def parse_model(d, ch, verbose=True):
                 args[2] = make_divisible(min(args[2], max_channels) * width, 8)
             if m in {Detect, Detect_SEAM, YOLOEDetect, Segment, Segment26, YOLOESegment, YOLOESegment26, Pose, Pose26, OBB, OBB26}:
                 m.legacy = legacy
+
+        
         elif m is v10Detect:
             args.append([ch[x] for x in f])
         elif m is ImagePoolingAttn:
@@ -1779,36 +1781,73 @@ def parse_model(d, ch, verbose=True):
         #             c2 = ch[f] if isinstance(f, int) else ch[-1]
         #     except Exception:
         #         c2 = ch[-1]
+        # elif m in frozenset(
+        #     {
+        #         Detect,
+        #         Detect_SEAM,
+        #         WorldDetect,
+        #         YOLOEDetect,
+        #         Segment,
+        #         Segment26,
+        #         YOLOESegment,
+        #         YOLOESegment26,
+        #         Pose,
+        #         Pose26,
+        #         OBB,
+        #         OBB26,
+        #     }
+        # ):
+        #     # Detect-like heads: append runtime args expected by the head constructor
+        #     args.extend([reg_max, end2end, [ch[x] for x in f]])
+        
+        #     # Seg heads need mask channel scaling on args[2]
+        #     if m in {Segment, Segment26, YOLOESegment, YOLOESegment26}:
+        #         args[2] = make_divisible(min(args[2], max_channels) * width, 8)
+        
+        #     # Keep legacy behavior flag aligned with official detect-family heads
+        #     if m in {Detect, Detect_SEAM, YOLOEDetect, Segment, Segment26, YOLOESegment, YOLOESegment26, Pose, Pose26, OBB, OBB26}:
+        #         m.legacy = legacy
+        
+        #     # Output channel bookkeeping for parser
+        #     if isinstance(f, (list, tuple)) and len(f):
+        #         c2 = ch[f[0]]
+        # else:
+        #     c2 = ch[f] if isinstance(f, int) else ch[-1]
+
         elif m in frozenset(
-            {
-                Detect,
-                Detect_SEAM,
-                WorldDetect,
-                YOLOEDetect,
-                Segment,
-                Segment26,
-                YOLOESegment,
-                YOLOESegment26,
-                Pose,
-                Pose26,
-                OBB,
-                OBB26,
-            }
-        ):
-            # Detect-like heads: append runtime args expected by the head constructor
-            args.extend([reg_max, end2end, [ch[x] for x in f]])
-        
-            # Seg heads need mask channel scaling on args[2]
-            if m in {Segment, Segment26, YOLOESegment, YOLOESegment26}:
-                args[2] = make_divisible(min(args[2], max_channels) * width, 8)
-        
-            # Keep legacy behavior flag aligned with official detect-family heads
-            if m in {Detect, Detect_SEAM, YOLOEDetect, Segment, Segment26, YOLOESegment, YOLOESegment26, Pose, Pose26, OBB, OBB26}:
-                m.legacy = legacy
-        
-            # Output channel bookkeeping for parser
-            if isinstance(f, (list, tuple)) and len(f):
-                c2 = ch[f[0]]
+        {
+            Detect,
+            Detect_SEAM,
+            WorldDetect,
+            YOLOEDetect,
+            Segment,
+            Segment26,
+            YOLOESegment,
+            YOLOESegment26,
+            Pose,
+            Pose26,
+            OBB,
+            OBB26,
+        }
+    ):
+        args.extend([reg_max, end2end, [ch[x] for x in f]])
+    
+        if m in {Segment, Segment26, YOLOESegment, YOLOESegment26}:
+            args[2] = make_divisible(min(args[2], max_channels) * width, 8)
+    
+        if m in {
+            Detect, Detect_SEAM,
+            YOLOEDetect,
+            Segment, Segment26,
+            YOLOESegment, YOLOESegment26,
+            Pose, Pose26,
+            OBB, OBB26
+        }:
+            m.legacy = legacy
+    
+        # 关键：保证 c2 正确
+        if isinstance(f, (list, tuple)) and len(f):
+            c2 = ch[f[0]]
         else:
             c2 = ch[f] if isinstance(f, int) else ch[-1]
 
