@@ -39,6 +39,14 @@ jobs:
           pip install -e .
           pip install pytest pytest-cov
 
+      - name: Prepare model weights
+        run: |
+          mkdir -p weights
+          curl -L --retry 5 --retry-delay 5 \
+            https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26n.pt \
+            -o weights/yolo26n.pt
+          ls -lh weights
+
       - name: Check environment
         run: |
           python --version
